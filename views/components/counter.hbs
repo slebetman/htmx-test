@@ -13,16 +13,20 @@
 			font-size: 30px;
 			color: #3366aa;
 		}
+
+		#{{ cid }} button {
+			cursor: pointer;
+		}
 	</style>
 
 	<h2>{{n}}</h2>
 
 
-	<button hx-get="/dec?n={{ n }}&cid={{ cid }}" hx-target="#{{ cid }}" hx-swap="outerHTML" style="cursor:pointer">
+	<button hx-get="/dec?n={{ n }}&cid={{ cid }}" hx-target="#{{ cid }}" hx-swap="outerHTML">
 		-
 	</button>
 
-	<button hx-get="/inc?n={{ n }}&cid={{ cid }}" hx-target="#{{ cid }}" hx-swap="outerHTML" style="cursor:pointer">
+	<button hx-get="/inc?n={{ n }}&cid={{ cid }}" hx-target="#{{ cid }}" hx-swap="outerHTML">
 		+
 	</button>
 </div>
