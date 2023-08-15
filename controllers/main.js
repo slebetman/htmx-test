@@ -5,16 +5,18 @@
 module.exports = function (app) {
 	app.get('/inc', async (req,res,next) => {
 		let n = req.query.n;
+		const cid = req.query.cid;
 		n++;
 
-		res.render('components/counter', {n});
+		res.render('components/counter', {n, cid});
 	})
 
 	app.get('/dec', async (req,res,next) => {
 		let n = req.query.n;
+		const cid = req.query.cid;
 		n--;
 
-		res.render('components/counter', {n});
+		res.render('components/counter', {n, cid});
 	})
 
 	app.get('/', async (req,res,next) => {

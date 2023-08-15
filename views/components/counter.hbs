@@ -1,12 +1,28 @@
-<div id="counter">
+<div id="{{ cid }}">
+	<style>
+		#{{ cid }} {
+			width: 100px;
+			text-align: center;
+			margin: 20px;
+			padding: 10px;
+			border: 1px solid #999;
+			border-radius: 10px;
+		}
+
+		#{{ cid }} h2 {
+			font-size: 30px;
+			color: #3366aa;
+		}
+	</style>
+
 	<h2>{{n}}</h2>
 
 
-	<button hx-get="/dec?n={{n}}" hx-target="#counter" hx-swap="outerHTML" style="cursor:pointer">
+	<button hx-get="/dec?n={{ n }}&cid={{ cid }}" hx-target="#{{ cid }}" hx-swap="outerHTML" style="cursor:pointer">
 		-
 	</button>
-	
-	<button hx-get="/inc?n={{n}}" hx-target="#counter" hx-swap="outerHTML" style="cursor:pointer">
+
+	<button hx-get="/inc?n={{ n }}&cid={{ cid }}" hx-target="#{{ cid }}" hx-swap="outerHTML" style="cursor:pointer">
 		+
 	</button>
 </div>
