@@ -11,6 +11,7 @@ const app = express();
 const hbs = create({
 	extname: '.hbs',
 	layoutsDir: 'views/layouts',
+	partialsDir: 'views/components',
 	defaultLayout: false
 });
 

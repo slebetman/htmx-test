@@ -7,12 +7,20 @@ module.exports = function (app) {
 		let n = req.query.n;
 		n++;
 
-		res.send(`<div hx-get="/inc?n=${n}" hx-target="this" hx-swap="outerHTML" style="cursor:pointer">${n}</div>`);
+		res.render('components/counter', {n});
+	})
+
+	app.get('/dec', async (req,res,next) => {
+		let n = req.query.n;
+		n--;
+
+		res.render('components/counter', {n});
 	})
 
 	app.get('/', async (req,res,next) => {
 		res.render('main', {
-			layout: 'main'
+			layout: 'main',
+			n: 1,
 		});
 	})
 }

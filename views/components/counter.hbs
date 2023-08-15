@@ -1,0 +1,12 @@
+<div id="counter">
+	<h2>{{n}}</h2>
+
+
+	<button hx-get="/dec?n={{n}}" hx-target="#counter" hx-swap="outerHTML" style="cursor:pointer">
+		-
+	</button>
+	
+	<button hx-get="/inc?n={{n}}" hx-target="#counter" hx-swap="outerHTML" style="cursor:pointer">
+		+
+	</button>
+</div>
