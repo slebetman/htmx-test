@@ -3,6 +3,8 @@
 const express = require('express');
 const find = require('find');
 const path = require('path');
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 const compress = require('express-compress').compress;
 const create = require('express-handlebars').create;
 
@@ -23,6 +25,19 @@ const CONTROLLERS_DIR = path.join(path.resolve(__dirname), 'controllers');
 
 app.disable('x-powered-by');
 app.enable('trust proxy');
+
+app.use(session({
+	secret: 'xxx',
+	resave: true,
+	saveUninitialized: true,
+	store: new FileStore({
+		path: './sessions'
+	}),
+	cookie: {
+		secure: false,
+		httpOnly: true
+	}
+}))
 
 app.use(compress({contentType: /html/}));
 

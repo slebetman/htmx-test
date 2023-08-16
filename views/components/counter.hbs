@@ -16,17 +16,22 @@
 
 		#{{ cid }} button {
 			cursor: pointer;
+			margin-bottom: 5px;
 		}
 	</style>
 
 	<h2>{{n}}</h2>
 
 
-	<button hx-get="/dec?n={{ n }}&cid={{ cid }}" hx-target="#{{ cid }}" hx-swap="outerHTML">
+	<button hx-get="/dec?cid={{ cid }}" hx-target="#{{ cid }}" hx-swap="outerHTML">
 		-
 	</button>
 
-	<button hx-get="/inc?n={{ n }}&cid={{ cid }}" hx-target="#{{ cid }}" hx-swap="outerHTML">
+	<button hx-get="/inc?cid={{ cid }}" hx-target="#{{ cid }}" hx-swap="outerHTML">
 		+
+	</button>
+
+	<button hx-get="/reset?cid={{ cid }}" hx-target="#{{ cid }}" hx-swap="outerHTML">
+		Clear
 	</button>
 </div>
