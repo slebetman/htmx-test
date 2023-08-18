@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 
 const express = require('express');
-const find = require('find');
 const path = require('path');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
