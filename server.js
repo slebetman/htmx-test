@@ -22,6 +22,7 @@ app.set('view engine', 'hbs');
 app.set('views',path.join(path.resolve(__dirname), "views"));
 
 const CONTROLLERS_DIR = path.join(path.resolve(__dirname), 'controllers');
+const COMPONENTS_DIR = path.join(path.resolve(__dirname), 'components');
 
 app.disable('x-powered-by');
 app.enable('trust proxy');
@@ -43,6 +44,11 @@ app.use(compress({contentType: /html/}));
 
 // Auto-load controllers:
 find.eachfile(/\.js$/, CONTROLLERS_DIR, module => require(module)(app))
+.end(() => {
+	find.eachfile(/\.js$/, COMPONENTS_DIR, module => {
+		const component = require(module);
+		app.use(component.route);
+	})
 	.end(() => {
 		// Error handler sends JSON instead of HTML
 		app.use((err, req, res, next) => {
@@ -71,3 +77,4 @@ find.eachfile(/\.js$/, CONTROLLERS_DIR, module => require(module)(app))
 			() => console.log(`Server started, listening on ${8888} ..`)
 		);
 	});
+});
