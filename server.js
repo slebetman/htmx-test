@@ -7,6 +7,9 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const compress = require('express-compress').compress;
 const create = require('express-handlebars').create;
+const components = require('./lib/htmx-component');
+const controllers = require('./lib/controllers');
+const conf = require('./lib/config');
 
 const app = express();
 
@@ -43,38 +46,33 @@ app.use(session({
 app.use(compress({contentType: /html/}));
 
 // Auto-load controllers:
-find.eachfile(/\.js$/, CONTROLLERS_DIR, module => require(module)(app))
-.end(() => {
-	find.eachfile(/\.js$/, COMPONENTS_DIR, module => {
-		const component = require(module);
-		app.use(component.route);
-	})
-	.end(() => {
-		// Error handler sends JSON instead of HTML
-		app.use((err, req, res, next) => {
-			if (err.code !== 'DONT_CARE') {
-				console.error(err);
-			}
+controllers.init(app, CONTROLLERS_DIR).then(() =>
+components.init(app, COMPONENTS_DIR)).then(() =>
+{
+	// Error handler sends JSON instead of HTML
+	app.use((err, req, res, next) => {
+		if (err.code !== 'DONT_CARE') {
+			console.error(err);
+		}
 
-			if (res.headersSent) {
-				return next(err);
-			}
+		if (res.headersSent) {
+			return next(err);
+		}
 
-			res.status(500);
+		res.status(500);
 
-			if (err.sqlMessage) {
-				err.message = err.sqlMessage;
-			}
+		if (err.sqlMessage) {
+			err.message = err.sqlMessage;
+		}
 
-			let errorMessage = err.message ? err.message : err;
+		let errorMessage = err.message ? err.message : err;
 
-			res.render('error', {
-				errorMessage
-			})
+		res.render('error', {
+			errorMessage
 		})
+	})
 
-		app.listen(8888,
-			() => console.log(`Server started, listening on ${8888} ..`)
-		);
-	});
+	app.listen(conf.port,
+		() => console.log(`Server started, listening on ${conf.port} ..`)
+	);
 });
