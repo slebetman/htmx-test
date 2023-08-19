@@ -1,0 +1,177 @@
+#content {
+	margin: 40px 50px;
+  }
+  
+  li {
+	margin-bottom: 0.5em;
+  }
+  
+  #note .input-group {
+	margin-bottom: 20px;
+  }
+  
+  #note .input-group #title {
+	width: calc(100% - 175px);
+	display: inline;
+  }
+  
+  #note  .input-group button {
+	width: 150px;
+	padding-left: 0;
+	padding-right: 0;
+	margin-left: 10px;
+	float: right;
+  }
+  
+  #note .input-group #body {
+	width: calc(100% - 5px);
+	height: calc(100vh - 260px);
+	font-family: monospace;
+	font-size: 10pt;
+	margin: 0;
+	padding: 5px 10px;
+	overflow: auto;
+  }
+  
+  #note .input-group #body img {
+	max-height: 60vh;
+  }
+  
+  #note .input-group #body img[alt$="small"] {
+	max-height: 25vh;
+	max-width: 200px;
+  }
+  
+  pre code {
+	padding: 10px;
+	display: block;
+	background-color: #eee;
+	overflow: auto;
+  }
+  
+  .stickies pre code {
+	font-size: 12px;
+	overflow: hidden;
+  }
+  
+  .stickies ul {
+	padding-left: 20px;
+  }
+  
+  table {
+	border-collapse: collapse;
+  }
+  
+  th, td {
+	border: 1px solid black;
+	padding: 4px;
+  }
+  
+  th {
+	background-color: rgba(100, 100, 100, 0.25);
+	text-align: left;
+  }
+  
+  #note-list .stickies {
+	width: 190px;
+	height: 220px;
+	float: left;
+	border: 1px solid #aaaaaa;
+	overflow: hidden;
+	margin: 10px;
+	box-shadow: 3px 5px 8px #ccc;
+  }
+  
+  #note-list .stickies .body {
+	padding: 10px;
+	cursor:default;
+	height: calc(100% - 20px);
+  }
+  
+  #note-list .stickies .body .content {
+	width: 170px;
+	font-size: 10pt;
+  }
+  
+  #note-list .stickies .body .content img {
+	max-width: 50%;
+	height: auto;
+  }
+  
+  #note-list .stickies h3 {
+	margin: 0;
+	padding: 0;
+	cursor: default;
+  }
+  
+  #note-list button#create {
+	margin-bottom: 20px;
+	padding: 5px;
+  }
+  
+  #note-list .delete-btn {
+	float: right;
+	margin: 1px 5px;
+	font-size: 20px;
+	cursor: pointer;
+  }
+  
+  #content .material-icons-outlined {
+	vertical-align: middle;
+	margin-right: 5px;
+  }
+  
+  #header #weather {
+	position:absolute;
+	top:30px;
+	right: 16px;
+	color: #999;
+  }
+  
+  #header #weather img.icon {
+	vertical-align: middle;
+	filter: drop-shadow(0 1px 12px #09f);
+	margin-left: 10px;
+  }
+  
+  @media (max-width: 1024px) {
+	button, input, #note .input-group #body {
+	  font-size: 16px;
+	}
+  
+	#note .input-group #title {
+	  width: calc(100% - 150px);
+	}
+	
+	#note  .input-group button{
+	  width: 120px;
+	}
+  
+	#content {
+	  margin: 10px 20px;
+	}
+  
+	#note-list .stickies h3 {
+	  font-size: medium;
+	}
+  
+	#note-list .stickies {
+	  width: 140px;
+	  height: 140px;
+	}
+  
+	#note-list .stickies .body {
+	  width: 140px;
+	  height: 140px;
+	}
+  
+	#note-list .stickies .body .content {
+	  width: 120px;
+	  font-size: 9pt;
+	}
+  
+	#note .input-group #body {
+	  width: calc(100% - 15px);
+	  height: calc(100vh - 310px);
+	}
+  }
