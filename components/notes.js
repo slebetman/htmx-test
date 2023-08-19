@@ -9,7 +9,12 @@ const main = component.get('/notes',async ({ session }, hx) => {
 	hx.set('HX-Refresh','true');
 
 	if (user) {
-		logout = '<a href="/notes/logout">logout</a>';
+		logout = `<a href="/notes/logout" class="logout-btn">
+			<span class="material-icons-outlined">
+				logout
+			</span>
+			logout
+		</a>`;
 	}
 
 	return `
@@ -29,7 +34,7 @@ const main = component.get('/notes',async ({ session }, hx) => {
 	</div>
 
 	<div id="content">
-		${user? noteList.html({ session }) : login.get.html({ session })}
+		${user? await noteList.html({ session }) : login.get.html({ session })}
 	</div>
 	`
 })

@@ -1,15 +1,15 @@
 const component = require('../../lib/htmx-component');
 const db = require('../../lib/db');
 const bcrypt = require('bcryptjs');
-const noteList = require('./notelist');
 
 const css = `
 	#login {
-		margin: 0 auto;
-		padding: 20px;
+		margin: 20vh auto;
+		padding: 40px 20px;
 		width: 400px;
-		border: 1px solid black;
+		border: 1px solid #aaaaaa;
 		border-radius: 10px;
+		box-shadow: 3px 5px 8px #ccc;
 	}
 
 	#login .row {

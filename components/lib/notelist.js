@@ -1,7 +1,10 @@
 const component = require('../../lib/htmx-component');
+const { sticky } = require('./sticky');
+const db = require('../../lib/db');
 
-module.exports = component.get('/notelist',({ session }) => {
-	const list = [];
+module.exports = component.get('/notelist',async ({ session }) => {
+	const user = session.user;
+	const list = await db('notes').where({user: user.id});
 
 	return `
 	<div id="note-list">
@@ -12,12 +15,7 @@ module.exports = component.get('/notelist',({ session }) => {
 			New Note
 		</button>
 		<div>
-			${list.map(note => `<div>
-				title=${note.title}
-				content=${note.content}
-				color=${note.color}
-				note_id=${note.id}
-			</div>`)}
+			${list.map(note => sticky.html(note)).join('')}
 		</div>
 	</div>
 	`

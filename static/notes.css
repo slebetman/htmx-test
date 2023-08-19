@@ -127,6 +127,16 @@ th {
 	top: 10px;
 }
 
+.logout-btn {
+	text-decoration: underline;
+	color: black;
+}
+
+.logout-btn .material-icons-outlined {
+	vertical-align: middle;
+	font-size: 18px;
+}
+
 @media (max-width: 1024px) {
 	button, input, #note .input-group #body {
 		font-size: 16px;
