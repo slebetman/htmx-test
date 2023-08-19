@@ -27,7 +27,7 @@ const main = component.get('/notes',async ({ session }, hx) => {
 				<span class="material-icons-outlined" style=font-size: 1.4em; vertical-align:bottom">
 					sticky_note_2
 				</span>
-				NOTES
+				NOTES ${user? `[ ${user.name} ]` : ''}
 			</a>
 		</h1>
 		<div id="logout">${logout}</div>

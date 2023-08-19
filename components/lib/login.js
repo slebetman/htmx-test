@@ -24,17 +24,35 @@ const css = `
 	#login .row button {
 		float: right;
 	}
+
+	@keyframes fadeOut {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
+
+	.login-error {
+		color: #ff0000;
+		margin-left: 110px;
+		animation: fadeOut 0.8s ease-out 3.3s;
+	}
 `
 
-const form = component.private(() => {
+const form = component.private(({ error }) => {
 	return `
-	<style>${css}</style>
-	<div id="login">
-		<form id="login-form" hx-post="/notes/login">
+	<div id="login" hx-ext="remove-me">
+		<script src="https://unpkg.com/htmx.org/dist/ext/remove-me.js"></script>
+		<style>${css}</style>
+		<form id="login-form" hx-post="/notes/login" hx-target="#login" hx-swap="outerHTML">
 			<div class="row"><label for="email">Email:</label><input type="text" name="email"></div>
 			<div class="row"><label for="pass">Password:</label><input type="text" name="pass"></div>
 			<div class="row"><button type="submit">Login</button></div>
 		</form>
+
+		${error? `<span class="login-error" remove-me="4s">${error}</span>` : ''}
 	</div>
 	`
 })
@@ -44,7 +62,7 @@ const get = component.get('/notes/login',({ session }, hx) => {
 		hx.redirect('/notes');
 	}
 	else {
-		return form.html();
+		return form.html({});
 	}
 })
 
@@ -61,7 +79,7 @@ const post = component.post('/notes/login',async ({ session, email, pass }, hx) 
 		hx.redirect('/notes');
 	}
 	else {
-		return form.html();
+		return form.html({ error: "Invalid login!" });
 	}
 })
 
