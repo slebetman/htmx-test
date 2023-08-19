@@ -1,8 +1,16 @@
 const component = require('../lib/htmx-component');
 const noteList = require('./lib/notelist');
+const login = require('./lib/login');
 
-module.exports = component.get('/notes',async ({ session }) => {
+const main = component.get('/notes',async ({ session }, hx) => {
 	const user = session.user;
+	let logout = '';
+
+	hx.set('HX-Refresh','true');
+
+	if (user) {
+		logout = '<a href="/notes/logout">logout</a>';
+	}
 
 	return `
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"></link>
@@ -17,10 +25,21 @@ module.exports = component.get('/notes',async ({ session }) => {
 				NOTES
 			</a>
 		</h1>
+		<div id="logout">${logout}</div>
 	</div>
 
 	<div id="content">
-		${noteList.html({ session })}
+		${user? noteList.html({ session }) : login.get.html({ session })}
 	</div>
 	`
 })
+
+const logout = component.get('/notes/logout', ({ session }, { redirect }) => {
+	delete session.user;
+	redirect('/notes');
+})
+
+module.exports = {
+	main,
+	logout,
+}
