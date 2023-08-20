@@ -3,7 +3,11 @@ const db = require('../../lib/db');
 
 const sticky = component.get('/notes/sticky',({ id, color, title, content }) => {
 	return `
-	<div id="note-${id}" class="stickies" style="background-color:${color}">
+	<div id="note-${id}" class="stickies"
+		style="background-color:${color}"
+		hx-get="/note/view/${id}"
+		hx-target="#content"
+	>
 		<div class="delete-btn"
 			hx-delete="/notes/sticky/${id}"
 			hx-target="#note-${id}"

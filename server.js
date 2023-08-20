@@ -53,7 +53,21 @@ app.use(requestLogger);
 
 // Auto-load controllers:
 controllers.init(app, CONTROLLERS_DIR).then(() => 
-components.init(app, COMPONENTS_DIR)).then(() => {
+components.init(app, COMPONENTS_DIR, {
+	css : [
+		"https://fonts.googleapis.com/icon?family=Material+Icons+Outlined",
+		"/static/notes.css",
+	],
+	extensions : [
+		"https://unpkg.com/htmx.org/dist/ext/remove-me.js"
+	]
+})).then(() => {
+	app.use((req, res) => {
+		console.log('404: Not Found');
+		res.status(404);
+		res.send('404: Not Found.');
+	})
+
 	// Error handler sends JSON instead of HTML
 	app.use((err, req, res, next) => {
 		if (err.code !== 'DONT_CARE') {

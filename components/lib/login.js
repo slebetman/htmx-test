@@ -6,6 +6,49 @@ const LOGIN_WIDTH = 350;
 const LABEL_WIDTH = 80;
 const LOGIN_PADDING = 20;
 
+function form ({ error }) {
+	return `
+	<div id="login" hx-ext="remove-me">
+		<script src="https://unpkg.com/htmx.org/dist/ext/remove-me.js"></script>
+		<style>${css}</style>
+		<form id="login-form" hx-post="/notes/login" hx-target="#login" hx-swap="outerHTML">
+			<div class="row"><label for="email">Email:</label><input type="text" name="email"></div>
+			<div class="row"><label for="pass">Password:</label><input type="text" name="pass"></div>
+			<div class="footer"><button type="submit">Login</button></div>
+		</form>
+
+		${error ? `<span class="login-error" remove-me="4s">${error}</span>` : ''}
+	</div>
+	`;
+};
+
+const get = component.get('/notes/login', ({ session }, hx) => {
+	if (session.user) {
+		hx.redirect('/notes');
+	} else {
+		return form({});
+	}
+});
+
+const post = component.post('/notes/login', async ({ session, email, pass }, hx) => {
+	const user = await db('users').where({ email }).first();
+
+	if (user) {
+		if (await bcrypt.compare(pass, user.password)) {
+			session.user = {
+				id: user.id,
+				name: user.name,
+			};
+		}
+	}
+
+	if (session.user) {
+		await hx.redirect('/notes');
+	} else {
+		return form({ error: 'Invalid login!' });
+	}
+});
+
 const css = `
 	#login {
 		margin: 20vh auto;
@@ -51,49 +94,6 @@ const css = `
 		animation: fadeOut 0.8s ease-out 3.3s;
 	}
 `;
-
-const form = component.private(({ error }) => {
-	return `
-	<div id="login" hx-ext="remove-me">
-		<script src="https://unpkg.com/htmx.org/dist/ext/remove-me.js"></script>
-		<style>${css}</style>
-		<form id="login-form" hx-post="/notes/login" hx-target="#login" hx-swap="outerHTML">
-			<div class="row"><label for="email">Email:</label><input type="text" name="email"></div>
-			<div class="row"><label for="pass">Password:</label><input type="text" name="pass"></div>
-			<div class="footer"><button type="submit">Login</button></div>
-		</form>
-
-		${error ? `<span class="login-error" remove-me="4s">${error}</span>` : ''}
-	</div>
-	`;
-});
-
-const get = component.get('/notes/login', ({ session }, hx) => {
-	if (session.user) {
-		hx.redirect('/notes');
-	} else {
-		return form.html({});
-	}
-});
-
-const post = component.post('/notes/login', async ({ session, email, pass }, hx) => {
-	const user = await db('users').where({ email }).first();
-
-	if (user) {
-		if (await bcrypt.compare(pass, user.password)) {
-			session.user = {
-				id: user.id,
-				name: user.name,
-			};
-		}
-	}
-
-	if (session.user) {
-		await hx.redirect('/notes');
-	} else {
-		return form.html({ error: 'Invalid login!' });
-	}
-});
 
 module.exports = {
 	get,
