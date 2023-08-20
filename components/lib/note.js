@@ -80,7 +80,7 @@ const editor = component.get('/note/edit', ({ id, title, color, content }) => {
 					<button>
 						Save
 					</button>
-					<button ${id === null ?
+					<button ${id === 'new' ?
 						goto('/notes') : goto('/note/view',id)
 					}>
 						Cancel
