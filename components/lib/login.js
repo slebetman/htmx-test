@@ -2,11 +2,15 @@ const component = require('../../lib/htmx-component');
 const db = require('../../lib/db');
 const bcrypt = require('bcryptjs');
 
+const LOGIN_WIDTH = 350;
+const LABEL_WIDTH = 80;
+const LOGIN_PADDING = 20;
+
 const css = `
 	#login {
 		margin: 20vh auto;
-		padding: 40px 20px;
-		width: 400px;
+		padding: 40px ${LOGIN_PADDING}px;
+		width: ${LOGIN_WIDTH}px;
 		border: 1px solid #aaaaaa;
 		border-radius: 10px;
 		box-shadow: 3px 5px 8px #ccc;
@@ -18,10 +22,17 @@ const css = `
 
 	#login .row label {
 		display: inline-block;
-		width: 100px;
+		width: ${LABEL_WIDTH}px;
 	}
 
-	#login .row button {
+	#login .row input {
+		width: ${LOGIN_WIDTH - LABEL_WIDTH - LOGIN_PADDING}px;
+	}
+
+	#login .footer {
+		margin-top: 20px;
+	}
+	#login .footer button {
 		float: right;
 	}
 
@@ -39,7 +50,7 @@ const css = `
 		margin-left: 110px;
 		animation: fadeOut 0.8s ease-out 3.3s;
 	}
-`
+`;
 
 const form = component.private(({ error }) => {
 	return `
@@ -49,41 +60,42 @@ const form = component.private(({ error }) => {
 		<form id="login-form" hx-post="/notes/login" hx-target="#login" hx-swap="outerHTML">
 			<div class="row"><label for="email">Email:</label><input type="text" name="email"></div>
 			<div class="row"><label for="pass">Password:</label><input type="text" name="pass"></div>
-			<div class="row"><button type="submit">Login</button></div>
+			<div class="footer"><button type="submit">Login</button></div>
 		</form>
 
-		${error? `<span class="login-error" remove-me="4s">${error}</span>` : ''}
+		${error ? `<span class="login-error" remove-me="4s">${error}</span>` : ''}
 	</div>
-	`
-})
+	`;
+});
 
-const get = component.get('/notes/login',({ session }, hx) => {
+const get = component.get('/notes/login', ({ session }, hx) => {
 	if (session.user) {
 		hx.redirect('/notes');
-	}
-	else {
+	} else {
 		return form.html({});
 	}
-})
+});
 
-const post = component.post('/notes/login',async ({ session, email, pass }, hx) => {
+const post = component.post('/notes/login', async ({ session, email, pass }, hx) => {
 	const user = await db('users').where({ email }).first();
 
 	if (user) {
 		if (await bcrypt.compare(pass, user.password)) {
-			session.user = user;
+			session.user = {
+				id: user.id,
+				name: user.name,
+			};
 		}
 	}
 
 	if (session.user) {
-		hx.redirect('/notes');
+		await hx.redirect('/notes');
+	} else {
+		return form.html({ error: 'Invalid login!' });
 	}
-	else {
-		return form.html({ error: "Invalid login!" });
-	}
-})
+});
 
 module.exports = {
 	get,
 	post,
-}
+};

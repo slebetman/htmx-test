@@ -2,11 +2,11 @@ const component = require('../lib/htmx-component');
 const noteList = require('./lib/notelist');
 const login = require('./lib/login');
 
-const main = component.get('/notes',async ({ session }, hx) => {
+const main = component.get('/notes', async ({ session }, hx) => {
 	const user = session.user;
 	let logout = '';
 
-	hx.set('HX-Refresh','true');
+	hx.set('HX-Refresh', 'true');
 
 	if (user) {
 		logout = `<a href="/notes/logout" class="logout-btn">
@@ -27,24 +27,24 @@ const main = component.get('/notes',async ({ session }, hx) => {
 				<span class="material-icons-outlined" style=font-size: 1.4em; vertical-align:bottom">
 					sticky_note_2
 				</span>
-				NOTES ${user? `[ ${user.name} ]` : ''}
+				NOTES ${user ? `[ ${user.name} ]` : ''}
 			</a>
 		</h1>
 		<div id="logout">${logout}</div>
 	</div>
 
 	<div id="content">
-		${user? await noteList.html({ session }) : login.get.html({ session })}
+		${user ? await noteList.html({ session }) : login.get.html({ session })}
 	</div>
-	`
-})
+	`;
+});
 
-const logout = component.get('/notes/logout', ({ session }, { redirect }) => {
+const logout = component.get('/notes/logout', async ({ session }, { redirect }) => {
 	delete session.user;
-	redirect('/notes');
-})
+	await redirect('/notes');
+});
 
 module.exports = {
 	main,
 	logout,
-}
+};

@@ -15,7 +15,7 @@ li {
 	display: inline;
 }
 
-#note  .input-group button {
+#note .input-group button {
 	width: 150px;
 	padding-left: 0;
 	padding-right: 0;
@@ -62,7 +62,8 @@ table {
 	border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
 	border: 1px solid black;
 	padding: 4px;
 }
@@ -84,7 +85,7 @@ th {
 
 #note-list .stickies .body {
 	padding: 10px;
-	cursor:default;
+	cursor: default;
 	height: calc(100% - 20px);
 }
 
@@ -138,7 +139,9 @@ th {
 }
 
 @media (max-width: 1024px) {
-	button, input, #note .input-group #body {
+	button,
+	input,
+	#note .input-group #body {
 		font-size: 16px;
 	}
 
@@ -146,7 +149,7 @@ th {
 		width: calc(100% - 150px);
 	}
 
-	#note  .input-group button{
+	#note .input-group button {
 		width: 120px;
 	}
 
