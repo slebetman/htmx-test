@@ -1,5 +1,6 @@
 const component = require('../../lib/htmx-component');
 const db = require('../../lib/db');
+const markdown = require('../../lib/markdown');
 
 const view = component.get('/note/view/:id', async ({ session, id }) => {
 	const user = session.user;
@@ -22,20 +23,20 @@ function goto (...path) {
 }
 
 function gotoEditor (id) {
-	return goto('/note/edit',id);
+	return goto('/note/edit',id) + ' hx-trigger="dblclick"';
 }
 
 const viewer = component.get('/note/view', ({ id, title, color, content }) => {
 	return `
 		<div id="note">
 			<style>${css}</style>
-			<div class="input-group" ${gotoEditor(id)}>
+			<div class="input-group" ${gotoEditor(id)} title="Double click to edit">
 				<h3>${title}</h3>
 			</div>
-			<div class="input-group" ${gotoEditor(id)}>
+			<div class="input-group" ${gotoEditor(id)} title="Double click to edit">
 				<div id="body"
 					style="background-color: ${color}"
-				>${content}</div>
+				>${markdown(content)}</div>
 			</div>
 			<div class="input-group">
 				<button ${goto('/notelist')}>
@@ -67,7 +68,7 @@ const editor = component.get('/note/edit', ({ id, title, color, content }) => {
 			<form hx-post="/note/edit/${id}">
 				<div class="input-group">
 					<input type="text" id="title" name="title" value="${title || ''}" />
-					<input type="hidden" name="color" value="#FFFFFF" />
+					<input type="hidden" name="color" value="${color || '#FFFFFF'}" />
 					${ '' /* <ColorPicker value={color} onChange={c => setColor(c)} /> */ }
 				</div>
 				<div class="input-group">

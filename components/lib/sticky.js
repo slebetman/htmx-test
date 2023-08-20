@@ -1,5 +1,6 @@
 const component = require('../../lib/htmx-component');
 const db = require('../../lib/db');
+const markdown = require('../../lib/markdown');
 
 const sticky = component.get('/notes/sticky',({ id, color, title, content }) => {
 	return `
@@ -7,6 +8,8 @@ const sticky = component.get('/notes/sticky',({ id, color, title, content }) => 
 		style="background-color:${color}"
 		hx-get="/note/view/${id}"
 		hx-target="#content"
+		hx-trigger="dblclick"
+		title="Double click to view"
 	>
 		<div class="delete-btn"
 			hx-delete="/notes/sticky/${id}"
@@ -19,7 +22,7 @@ const sticky = component.get('/notes/sticky',({ id, color, title, content }) => 
 		<div class="body">
 			<h3>${title}</h3>
 			<div className="content">
-				${content}
+				${markdown(content)}
 			</div>
 		</div>
 	</div>
