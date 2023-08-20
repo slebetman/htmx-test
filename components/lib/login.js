@@ -14,7 +14,7 @@ function form ({ error }) {
 		<style>${css}</style>
 		<form id="login-form" hx-post="/notes/login" hx-target="#login" hx-swap="outerHTML">
 			<div class="row"><label for="email">Email:</label><input type="text" name="email"></div>
-			<div class="row"><label for="pass">Password:</label><input type="text" name="pass"></div>
+			<div class="row"><label for="pass">Password:</label><input type="password" name="pass"></div>
 			<div class="footer"><button type="submit">Login</button></div>
 		</form>
 
