@@ -79,7 +79,8 @@ const css = `
 
 	@media (max-width: 1024px) {
 		#note-list .stickies {
-			width: 150px;
+			width: calc(50% - 12px);
+			max-width: 190px;
 			height: 220px;
 			margin: 5px;
 		}
