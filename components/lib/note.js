@@ -68,8 +68,7 @@ const editor = component.get('/note/edit', ({ id, title, color, content }) => {
 			<form hx-post="/note/edit/${id}">
 				<div class="input-group">
 					<input type="text" id="title" name="title" value="${title || ''}" />
-					<input type="hidden" name="color" value="${color || '#FFFFFF'}" />
-					${ '' /* <ColorPicker value={color} onChange={c => setColor(c)} /> */ }
+					<input type="color" id="color" name="color" value="${color || '#FFFFFF'}" />
 				</div>
 				<div class="input-group">
 					<textarea id="body" name="content"
@@ -119,8 +118,14 @@ css = `
 	}
 
 	#note .input-group #title {
-		width: calc(100% - 20px);
+		width: calc(100% - 70px);
 		display: inline;
+	}
+
+	#note .input-group #color {
+		width: 50px;
+		height: 32px;
+		vertical-align: middle;
 	}
 
 	#note .input-group h3 {
