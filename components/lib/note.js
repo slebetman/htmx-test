@@ -50,7 +50,7 @@ const edit = component.get('/note/edit/:id', async ({ session, id }) => {
 	const user = session.user;
 
 	const note = id === 'new' ?
-		{ id: null } : await db('notes').where({ user: user.id, id: id }).first();
+		{ id } : await db('notes').where({ user: user.id, id: id }).first();
 
 	if (note) {
 		return editor.html(note);
@@ -64,31 +64,52 @@ const editor = component.get('/note/edit', ({ id, title, color, content }) => {
 	return `
 		<div id="note">
 			<style>${css}</style>
-			<div class="input-group">
-				<input type="text" id="title" value="${title || ''}" />
-				${ '' /* <ColorPicker value={color} onChange={c => setColor(c)} /> */ }
-			</div>
-			<div class="input-group">
-				<textarea id="body"
-					style="background-color: ${color || '#FFFFFF'}"
-				>${content || ''}</textarea>
-			</div>
-			<div class="input-group">
-				<button>
-					Save
-				</button>
-				<button ${id === null ?
-					goto('/notes') : goto('/note/view',id)
-				}>
-					Cancel
-				</button>
-			</div>
+			<form hx-post="/note/edit/${id}">
+				<div class="input-group">
+					<input type="text" id="title" name="title" value="${title || ''}" />
+					<input type="hidden" name="color" value="#FFFFFF" />
+					${ '' /* <ColorPicker value={color} onChange={c => setColor(c)} /> */ }
+				</div>
+				<div class="input-group">
+					<textarea id="body" name="content"
+						style="background-color: ${color || '#FFFFFF'}"
+					>${content || ''}</textarea>
+				</div>
+				<div class="input-group">
+					<button>
+						Save
+					</button>
+					<button ${id === null ?
+						goto('/notes') : goto('/note/view',id)
+					}>
+						Cancel
+					</button>
+				</div>
+			</form>
 		</div>
 	`;
 })
 
-const save = component.post('/note/edit/:id', ({ session, id }) => {
+const save = component.post('/note/edit/:id', async ({ session, id, title, color, content }, hx) => {
+	const user = session.user;
 
+	if (id === 'new') {
+		await db('notes').insert({
+			user: user.id,
+			title,
+			color,
+			content,
+		})
+	}
+	else {
+		await db('notes').where({ user: user.id, id }).update({
+			title,
+			color,
+			content,
+		})
+	}
+
+	await hx.redirect('/notes');
 })
 
 css = `
