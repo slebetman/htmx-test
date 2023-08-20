@@ -52,32 +52,30 @@ app.use(compress({ contentType: /html/ }));
 app.use(requestLogger);
 
 // Auto-load controllers:
-controllers
-	.init(app, CONTROLLERS_DIR)
-	.then(() => components.init(app, COMPONENTS_DIR))
-	.then(() => {
-		// Error handler sends JSON instead of HTML
-		app.use((err, req, res, next) => {
-			if (err.code !== 'DONT_CARE') {
-				console.error(err);
-			}
+controllers.init(app, CONTROLLERS_DIR).then(() => 
+components.init(app, COMPONENTS_DIR)).then(() => {
+	// Error handler sends JSON instead of HTML
+	app.use((err, req, res, next) => {
+		if (err.code !== 'DONT_CARE') {
+			console.error(err);
+		}
 
-			if (res.headersSent) {
-				return next(err);
-			}
+		if (res.headersSent) {
+			return next(err);
+		}
 
-			res.status(500);
+		res.status(500);
 
-			if (err.sqlMessage) {
-				err.message = err.sqlMessage;
-			}
+		if (err.sqlMessage) {
+			err.message = err.sqlMessage;
+		}
 
-			let errorMessage = err.message ? err.message : err;
+		let errorMessage = err.message ? err.message : err;
 
-			res.render('error', {
-				errorMessage,
-			});
+		res.render('error', {
+			errorMessage,
 		});
-
-		app.listen(conf.port, () => console.log(`Server started, listening on ${conf.port} ..`));
 	});
+
+	app.listen(conf.port, () => console.log(`Server started, listening on ${conf.port} ..`));
+});

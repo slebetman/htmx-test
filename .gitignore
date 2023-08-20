@@ -5,3 +5,4 @@ config.json
 sample.db
 .vscode
 .DS_Store
+.prettierignore
