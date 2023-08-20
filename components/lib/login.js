@@ -3,6 +3,7 @@ const db = require('../../lib/db');
 const bcrypt = require('bcryptjs');
 
 const LOGIN_WIDTH = 350;
+const MOBILE_LOGIN_WIDTH = 240;
 const LABEL_WIDTH = 80;
 const LOGIN_PADDING = 20;
 
@@ -92,6 +93,32 @@ const css = `
 		color: #ff0000;
 		margin-left: 110px;
 		animation: fadeOut 0.8s ease-out 3.3s;
+	}
+
+	@media (max-width: 1024px) {
+		#login {
+			padding: 40px ${LOGIN_PADDING}px;
+			width: ${MOBILE_LOGIN_WIDTH}px;
+		}
+	
+		#login .row {
+			margin: 5px;
+		}
+	
+		#login .row label {
+			display: inline-block;
+			width: 100%;
+		}
+	
+		#login .row input {
+			width: 100%;
+			margin-bottom: 5px;
+		}
+
+		#login .footer {
+			margin-top: 20px;
+			margin-bottom: 40px;
+		}
 	}
 `;
 

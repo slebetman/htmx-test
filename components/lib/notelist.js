@@ -75,4 +75,13 @@ const css = `
 	.stickies ul {
 		padding-left: 20px;
 	}
+
+
+	@media (max-width: 1024px) {
+		#note-list .stickies {
+			width: 150px;
+			height: 220px;
+			margin: 5px;
+		}
+	}
 `;

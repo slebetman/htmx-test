@@ -143,11 +143,14 @@ css = `
 	#note .input-group #body {
 		width: calc(100% - 20px);
 		height: calc(100vh - 260px);
-		font-family: monospace;
-		font-size: 10pt;
 		margin: 0;
 		padding: 5px 10px;
 		overflow: auto;
+	}
+
+	#note .input-group textarea#body {
+		font-family: monospace;
+		font-size: 10pt;
 	}
 
 	#note .input-group #body img {
