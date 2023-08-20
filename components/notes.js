@@ -2,6 +2,24 @@ const component = require('../lib/htmx-component');
 const noteList = require('./lib/notelist');
 const login = require('./lib/login');
 
+const logoutCss = `
+	#logout {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+	}
+
+	.logout-btn {
+		text-decoration: underline;
+		color: black;
+	}
+
+	.logout-btn .material-icons-outlined {
+		vertical-align: middle;
+		font-size: 18px;
+	}
+`;
+
 const main = component.get('/notes', async ({ session }, hx) => {
 	const user = session.user;
 	let logout = '';
@@ -10,6 +28,7 @@ const main = component.get('/notes', async ({ session }, hx) => {
 
 	if (user) {
 		logout = `<a href="/notes/logout" class="logout-btn">
+			<style>${logoutCss}</style>
 			<span class="material-icons-outlined">
 				logout
 			</span>
