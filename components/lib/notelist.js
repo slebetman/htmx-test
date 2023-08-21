@@ -1,4 +1,4 @@
-const component = require('../../lib/htmx-component');
+const component = require('express-htmx-components');
 const { sticky } = require('./sticky');
 const db = require('../../lib/db');
 

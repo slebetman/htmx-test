@@ -1,4 +1,4 @@
-const component = require('../../lib/htmx-component');
+const component = require('express-htmx-components');
 
 module.exports = component.get('/main/name',({ session, name, reset }) => {
 	if (name) {

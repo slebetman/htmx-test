@@ -1,4 +1,4 @@
-const component = require('../lib/htmx-component');
+const component = require('express-htmx-components');
 const noteList = require('./lib/notelist');
 const login = require('./lib/login');
 
