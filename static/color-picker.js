@@ -28,6 +28,7 @@
 			css(x,{
 				backgroundColor: x.value,
 				color: 'transparent',
+				fontSize: '0',
 			});
 			
 			const dropDown = make('div');
