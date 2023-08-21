@@ -20,7 +20,7 @@ const main = component.get('/notes', async ({ session }, hx) => {
 
 	return `
 	<style>${css}</style>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
 
 	<div id="header">
 		<h1 id="title">
