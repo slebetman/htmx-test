@@ -59,7 +59,8 @@ components.init(app, COMPONENTS_DIR, {
 		"/static/notes.css",
 	],
 	js : [
-		"https://unpkg.com/htmx.org/dist/ext/remove-me.js"
+		"https://unpkg.com/htmx.org/dist/ext/remove-me.js",
+		"/static/color-picker.js"
 	]
 })).then(() => {
 	app.use((req, res) => {
