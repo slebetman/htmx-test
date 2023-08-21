@@ -58,7 +58,7 @@ components.init(app, COMPONENTS_DIR, {
 		"https://fonts.googleapis.com/icon?family=Material+Icons+Outlined",
 		"/static/notes.css",
 	],
-	extensions : [
+	js : [
 		"https://unpkg.com/htmx.org/dist/ext/remove-me.js"
 	]
 })).then(() => {
