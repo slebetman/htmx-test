@@ -1,4 +1,5 @@
 const component = require('express-htmx-components');
+const html = require('../../lib/html');
 
 module.exports = component.get('/main/counter/:cid',({ session, cid, cmd }) => {
 	if (!session.counters) {

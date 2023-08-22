@@ -1,12 +1,13 @@
 const component = require('express-htmx-components');
 const { sticky } = require('./sticky');
 const db = require('../../lib/db');
+const html = require('../../lib/html');
 
 module.exports = component.get('/notelist', async ({ session }) => {
 	const user = session.user;
 	const list = await db('notes').where({ user: user.id }).orderBy(['index', 'id']);
 
-	return `
+	return html`
 	<div id="note-list">
 		<style>${css}</style>
 		<button id="create" hx-get="/note/edit/new" hx-target="#content">

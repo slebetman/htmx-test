@@ -1,5 +1,6 @@
 const component = require('express-htmx-components');
 const db = require('../../lib/db');
+const html = require('../../lib/html');
 const bcrypt = require('bcryptjs');
 
 const LOGIN_WIDTH = 350;
@@ -8,7 +9,7 @@ const LABEL_WIDTH = 80;
 const LOGIN_PADDING = 20;
 
 function form ({ error }) {
-	return `
+	return html`
 	<div id="login" hx-ext="remove-me">
 		<script src="https://unpkg.com/htmx.org/dist/ext/remove-me.js"></script>
 		<style>${css}</style>

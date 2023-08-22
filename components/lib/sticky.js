@@ -1,9 +1,10 @@
 const component = require('express-htmx-components');
 const db = require('../../lib/db');
 const markdown = require('../../lib/markdown');
+const html = require('../../lib/html');
 
 const sticky = component.get('/notes/sticky',({ id, color, title, content }) => {
-	return `
+	return html`
 	<div id="note-${id}" class="stickies"
 		style="background-color:${color}"
 		hx-get="/note/view/${id}"
