@@ -33,11 +33,11 @@ const main = component.get('/notes', async ({ session }, hx) => {
 			</a>
 		</h1>
 		<span id="username">${user ? user.name : ''}</span>
-		<div id="logout">${logout}</div>
+		<div id="logout">$${logout}</div>
 	</div>
 
 	<div id="content">
-		${user ? await noteList.html({ session }) : login.get.html({ session })}
+		$${user ? await noteList.html({ session }) : login.get.html({ session })}
 	</div>
 	`;
 });

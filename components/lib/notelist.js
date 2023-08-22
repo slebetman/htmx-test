@@ -17,7 +17,7 @@ module.exports = component.get('/notelist', async ({ session }) => {
 			New Note
 		</button>
 		<div>
-			${list.map((note) => sticky.html(note)).join('')}
+			$${list.map((note) => sticky.html(note)).join('')}
 		</div>
 	</div>
 	`;

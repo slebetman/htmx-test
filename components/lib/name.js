@@ -15,7 +15,7 @@ module.exports = component.get('/main/name',({ session, name, reset }) => {
 			return `${session.name} <button hx-get="/main/name?reset=true" hx-target="#name-container" hx-swap="outerHTML">reset</button>`
 		}
 		else {
-			return `<form hx-get="/main/name" hx-target="#name-container" hx-swap="outerHTML">
+			return html`<form hx-get="/main/name" hx-target="#name-container" hx-swap="outerHTML">
 				<input name="name" id="name" type="text">
 				<button type="submit">Submit</button>
 			</form>`

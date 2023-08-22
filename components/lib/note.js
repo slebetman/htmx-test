@@ -31,16 +31,16 @@ const viewer = component.get('/note/view', ({ id, title, color, content }) => {
 	return html`
 		<div id="note">
 			<style>${css}</style>
-			<div class="input-group" ${gotoEditor(id)} title="Double click to edit">
+			<div class="input-group" $${gotoEditor(id)} title="Double click to edit">
 				<h3>${title}</h3>
 			</div>
-			<div class="input-group" ${gotoEditor(id)} title="Double click to edit">
+			<div class="input-group" $${gotoEditor(id)} title="Double click to edit">
 				<div id="body"
 					style="background-color: ${color}"
-				>${markdown(content)}</div>
+				>$${markdown(content)}</div>
 			</div>
 			<div class="input-group">
-				<button ${goto('/notelist')}>
+				<button $${goto('/notelist')}>
 					Back
 				</button>
 			</div>
@@ -88,7 +88,7 @@ const editor = component.get('/note/edit', ({ id, title, color, content }) => {
 					<button>
 						Save
 					</button>
-					<button ${id === 'new' ?
+					<button $${id === 'new' ?
 						goto('/notes') : goto('/note/view',id)
 					}>
 						Cancel

@@ -60,7 +60,7 @@ components.init(app, COMPONENTS_DIR, {
 	],
 	js : [
 		"https://unpkg.com/htmx.org/dist/ext/remove-me.js",
-		"/static/color-picker.js"
+		"/static/color-picker.min.js"
 	]
 })).then(() => {
 	app.use((req, res) => {
