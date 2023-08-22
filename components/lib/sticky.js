@@ -22,7 +22,7 @@ const sticky = component.get('/notes/sticky',({ id, color, title, content }) => 
 		</div>
 		<div class="body">
 			<h3>${title}</h3>
-			<div className="content">
+			<div class="content">
 				$${markdown(content)}
 			</div>
 		</div>
