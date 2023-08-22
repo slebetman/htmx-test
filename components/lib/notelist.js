@@ -46,7 +46,8 @@ const css = `
 	}
 
 	#note-list .stickies .body .content img {
-		max-width: 50%;
+		max-width: 100%;
+		max-height: 200px;
 		height: auto;
 	}
 
