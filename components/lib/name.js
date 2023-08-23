@@ -1,5 +1,5 @@
 const component = require('express-htmx-components');
-const html = require('../../lib/html');
+const { html, css } = require('../../lib/tags');
 
 module.exports = component.get('/main/name',({ session, name, reset }) => {
 	if (name) {
@@ -12,7 +12,10 @@ module.exports = component.get('/main/name',({ session, name, reset }) => {
 
 	function renderName () {
 		if (session.name) {
-			return `${session.name} <button hx-get="/main/name?reset=true" hx-target="#name-container" hx-swap="outerHTML">reset</button>`
+			return html`${session.name}
+				<button hx-get="/main/name?reset=true" hx-target="#name-container" hx-swap="outerHTML">
+					reset
+				</button>`
 		}
 		else {
 			return html`<form hx-get="/main/name" hx-target="#name-container" hx-swap="outerHTML">
@@ -22,7 +25,7 @@ module.exports = component.get('/main/name',({ session, name, reset }) => {
 		}
 	}
 
-	const css = `
+	const style = css`
 	#name-container {
 		width: 300px;
 		text-align: center;
@@ -32,11 +35,11 @@ module.exports = component.get('/main/name',({ session, name, reset }) => {
 		border-radius: 10px;
 	}`
 
-	return `<div id="name-container">
-		<style>${css}</style>
+	return html`<div id="name-container">
+		<style>${style}</style>
 
 		/main/name
 
-		<h2>Hello ${renderName()}</h2>
+		<h2>Hello $${renderName()}</h2>
 	</div>`
 })

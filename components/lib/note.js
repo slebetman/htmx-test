@@ -1,7 +1,7 @@
 const component = require('express-htmx-components');
 const db = require('../../lib/db');
 const markdown = require('../../lib/markdown');
-const html = require('../../lib/html');
+const { html, css } = require('../../lib/tags');
 
 const view = component.get('/note/view/:id', async ({ session, id }) => {
 	const user = session.user;
@@ -30,7 +30,7 @@ function gotoEditor (id) {
 const viewer = component.get('/note/view', ({ id, title, color, content }) => {
 	return html`
 		<div id="note">
-			<style>${css}</style>
+			<style>${style}</style>
 			<div class="input-group" $${gotoEditor(id)} title="Double click to edit">
 				<h3>${title}</h3>
 			</div>
@@ -65,7 +65,7 @@ const edit = component.get('/note/edit/:id', async ({ session, id }) => {
 const editor = component.get('/note/edit', ({ id, title, color, content }) => {
 	return html`
 		<div id="note">
-			<style>${css}</style>
+			<style>${style}</style>
 			<form hx-post="/note/edit/${id}">
 				<div class="input-group">
 					<input type="text" id="title"
@@ -121,7 +121,7 @@ const save = component.post('/note/edit/:id', async ({ session, id, title, color
 	await hx.redirect('/notes');
 })
 
-css = `
+const style = css`
 	#note .input-group {
 		margin-bottom: 20px;
 	}

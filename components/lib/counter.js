@@ -1,5 +1,5 @@
 const component = require('express-htmx-components');
-const html = require('../../lib/html');
+const { html, css } = require('../../lib/tags');
 
 module.exports = component.get('/main/counter/:cid',({ session, cid, cmd }) => {
 	if (!session.counters) {
@@ -19,7 +19,7 @@ module.exports = component.get('/main/counter/:cid',({ session, cid, cmd }) => {
 		[cid]: n,
 	}
 
-	const css = `
+	const style = css`
 		#${ cid } {
 			width: 150px;
 			text-align: center;
@@ -40,8 +40,8 @@ module.exports = component.get('/main/counter/:cid',({ session, cid, cmd }) => {
 		}
 	`
 
-	return `<div id="${ cid }">
-		<style>${css}</style>
+	return html`<div id="${ cid }">
+		<style>${style}</style>
 
 		/main/counter/${cid}
 

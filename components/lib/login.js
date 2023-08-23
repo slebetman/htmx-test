@@ -1,6 +1,6 @@
 const component = require('express-htmx-components');
 const db = require('../../lib/db');
-const html = require('../../lib/html');
+const { html, css } = require('../../lib/tags');
 const bcrypt = require('bcryptjs');
 
 const LOGIN_WIDTH = 350;
@@ -12,7 +12,7 @@ function form ({ error }) {
 	return html`
 	<div id="login" hx-ext="remove-me">
 		<script src="https://unpkg.com/htmx.org/dist/ext/remove-me.js"></script>
-		<style>${css}</style>
+		<style>${style}</style>
 		<form id="login-form" hx-post="/notes/login" hx-target="#login" hx-swap="outerHTML">
 			<div class="row"><label for="email">Email:</label><input type="text" name="email"></div>
 			<div class="row"><label for="pass">Password:</label><input type="password" name="pass"></div>
@@ -51,7 +51,7 @@ const post = component.post('/notes/login', async ({ session, email, pass }, hx)
 	}
 });
 
-const css = `
+const style = css`
 	#login {
 		margin: 20vh auto;
 		padding: 40px ${LOGIN_PADDING}px;

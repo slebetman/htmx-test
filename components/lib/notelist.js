@@ -1,7 +1,7 @@
 const component = require('express-htmx-components');
 const { sticky } = require('./sticky');
 const db = require('../../lib/db');
-const html = require('../../lib/html');
+const { html, css } = require('../../lib/tags');
 
 module.exports = component.get('/notelist', async ({ session }) => {
 	const user = session.user;
@@ -9,7 +9,7 @@ module.exports = component.get('/notelist', async ({ session }) => {
 
 	return html`
 	<div id="note-list">
-		<style>${css}</style>
+		<style>${style}</style>
 		<button id="create" hx-get="/note/edit/new" hx-target="#content">
 			<span class="material-icons-outlined">
 				note_add
@@ -23,7 +23,7 @@ module.exports = component.get('/notelist', async ({ session }) => {
 	`;
 });
 
-const css = `
+const style = css`
 	#note-list .stickies {
 		width: 190px;
 		height: 220px;

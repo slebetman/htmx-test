@@ -1,7 +1,7 @@
 const component = require('express-htmx-components');
 const noteList = require('./lib/notelist');
 const login = require('./lib/login');
-const html = require('../lib/html');
+const { html, css } = require('../lib/tags');
 
 const main = component.get('/notes', async ({ session }, hx) => {
 	const user = session.user;
@@ -11,7 +11,7 @@ const main = component.get('/notes', async ({ session }, hx) => {
 
 	if (user) {
 		logout = html`<a href="/notes/logout" class="logout-btn">
-			<style>${logoutCss}</style>
+			<style>${logoutStyle}</style>
 			<span class="material-icons-outlined">
 				logout
 			</span>
@@ -20,7 +20,7 @@ const main = component.get('/notes', async ({ session }, hx) => {
 	}
 
 	return html`
-	<style>${css}</style>
+	<style>${style}</style>
 	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
 
 	<div id="header">
@@ -47,7 +47,7 @@ const logout = component.get('/notes/logout', async ({ session }, { redirect }) 
 	await redirect('/notes');
 });
 
-const css = `
+const style = css`
 	#header h1#title {
 		font-size: 36px;
 		margin-bottom: 0;
@@ -61,7 +61,7 @@ const css = `
 	}
 `
 
-const logoutCss = `
+const logoutStyle = css`
 	#logout {
 		position: absolute;
 		right: 10px;
