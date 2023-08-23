@@ -31,7 +31,15 @@ const css = `
 		border: 1px solid #aaaaaa;
 		overflow: hidden;
 		margin: 10px;
-		box-shadow: 3px 5px 8px #ccc;
+		box-shadow: 3px 6px 8px #aaa;
+		background: linear-gradient(
+			170deg,
+			#00000040 0%,
+			#00000000 21%,
+			#00000000 80%,
+			#FFFFFF50 95%,
+			#FFFFFF80 100%
+		);
 	}
 
 	#note-list .stickies .body {
