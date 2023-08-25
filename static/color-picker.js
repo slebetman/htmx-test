@@ -16,7 +16,7 @@
 		return document.createElement(x);
 	}
 
-	function listen (el, event, fn) {
+	function on (el, event, fn) {
 		el.addEventListener(event,fn);
 	}
 
@@ -78,16 +78,17 @@
 			
 			document.body.appendChild(dropDown);
 			
-			listen(x,'click',(e) => {
+			on(x,'click',(e) => {
 				e.stopPropagation();
+				e.preventDefault();
 				css(dropDown,{display:'block'});
 			});
 			
-			listen(dropDown,'click', (e) => {
+			on(dropDown,'click', (e) => {
 				css(dropDown,{display:'none'});
 			});
 			
-			listen(document.body,'click', (e) => {
+			on(document.body,'click', (e) => {
 				css(dropDown,{display:'none'});
 			});
 		});
