@@ -2,8 +2,8 @@
 	const pallete = [
 		['#FFFFFF', '#FFFF66', '#FFCC66', '#FF6666', '#FF66FF', '#CC66FF'],
 		['#CCCCCC', '#FFFF00', '#FFAA00', '#FF3333', '#FF00FF', '#AA00FF'],
-		['#66CCFF', '#99FFFF', '#66FFCC', '#66FF66', '#6666FF', '#6666CC'],
-		['#00AAFF', '#33FFFF', '#00FFAA', '#00FF33', '#3333FF', '#3333AA'],
+		['#66CCFF', '#99FFFF', '#66FFCC', '#66FF66', '#8888FF', '#8888CC'],
+		['#00AAFF', '#33FFFF', '#00FFAA', '#00FF33', '#6666FF', '#7777AA'],
 	];
 
 	function css (el, styles) {
