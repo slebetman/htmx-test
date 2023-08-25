@@ -24,11 +24,11 @@
 		const elements = Array.from(el.querySelectorAll(selector));
 		
 		elements.forEach(x => {
-			console.log(x.value);
 			css(x,{
 				backgroundColor: x.value,
 				color: 'transparent',
 				fontSize: '0',
+				cursor: 'pointer',
 			});
 			
 			const dropDown = make('div');
