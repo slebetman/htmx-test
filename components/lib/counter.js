@@ -1,5 +1,5 @@
 const component = require('express-htmx-components');
-const { html, css } = require('../../lib/tags');
+const { html, css } = require('express-htmx-components/tags');
 
 module.exports = component.get('/main/counter/:cid',({ session, cid, cmd }) => {
 	if (!session.counters) {

@@ -1,7 +1,7 @@
 const component = require('express-htmx-components');
+const { html } = require('express-htmx-components/tags');
 const counter = require('./lib/counter');
 const name = require('./lib/name');
-const { html } = require('../lib/tags');
 
 module.exports = component.get('/main',({ session }) => {
 	if (!session.number) {

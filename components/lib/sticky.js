@@ -1,7 +1,7 @@
 const component = require('express-htmx-components');
+const { html } = require('express-htmx-components/tags');
 const db = require('../../lib/db');
 const markdown = require('../../lib/markdown');
-const { html } = require('../../lib/tags');
 
 const sticky = component.get('/notes/sticky',({ id, color, title, content }) => {
 	return html`

@@ -1,7 +1,7 @@
 const component = require('express-htmx-components');
+const { html, css } = require('express-htmx-components/tags');
 const noteList = require('./lib/notelist');
 const login = require('./lib/login');
-const { html, css } = require('../lib/tags');
 
 const main = component.get('/notes', async ({ session }, hx) => {
 	const user = session.user;

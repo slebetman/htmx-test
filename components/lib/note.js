@@ -1,7 +1,7 @@
 const component = require('express-htmx-components');
+const { html, css } = require('express-htmx-components/tags');
 const db = require('../../lib/db');
 const markdown = require('../../lib/markdown');
-const { html, css } = require('../../lib/tags');
 
 const view = component.get('/note/view/:id', async ({ session, id }) => {
 	const user = session.user;

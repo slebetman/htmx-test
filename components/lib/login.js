@@ -1,6 +1,6 @@
 const component = require('express-htmx-components');
+const { html, css } = require('express-htmx-components/tags');
 const db = require('../../lib/db');
-const { html, css } = require('../../lib/tags');
 const bcrypt = require('bcryptjs');
 
 const LOGIN_WIDTH = 350;
