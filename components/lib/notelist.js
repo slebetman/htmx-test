@@ -87,7 +87,7 @@ const style = css`
 	}
 
 
-	@media (max-width: 1024px) {
+	@media (max-device-width: 1024px) {
 		#note-list .stickies {
 			width: calc(50% - 12px);
 			max-width: 190px;

@@ -171,7 +171,7 @@ const style = css`
 		max-height: 25vh;
 		max-width: 200px;
 	}
-	@media (max-width: 1024px) {
+	@media (max-device-width: 1024px) {
 		#note .input-group #body {
 			font-size: 16px;
 			height: calc(100vh - 310px);
