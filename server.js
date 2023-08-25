@@ -6,7 +6,6 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const compress = require('express-compress').compress;
 const create = require('express-handlebars').create;
-const bodyParser = require('body-parser');
 const components = require('express-htmx-components');
 const controllers = require('./lib/controllers');
 const conf = require('./lib/config');
@@ -47,7 +46,7 @@ app.use(
 );
 
 app.use('/static', express.static('static'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(compress({ contentType: /html|js|css/ }));
 app.use(requestLogger);
 
