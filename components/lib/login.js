@@ -58,7 +58,8 @@ const style = css`
 		width: ${LOGIN_WIDTH}px;
 		border: 1px solid #aaaaaa;
 		border-radius: 10px;
-		box-shadow: 3px 5px 8px #ccc;
+		box-shadow: 3px 6px 8px #ccc;
+		background: linear-gradient(0deg, #00000020, #00000010 5%, transparent 40%)
 	}
 
 	#login .row {
