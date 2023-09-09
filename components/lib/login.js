@@ -19,7 +19,7 @@ function form ({ error }) {
 			<div class="footer"><button type="submit">Login</button></div>
 		</form>
 
-		${error ? `<span class="login-error" remove-me="4s">${error}</span>` : ''}
+		$${error ? `<span class="login-error" remove-me="4s">${error}</span>` : ''}
 	</div>
 	`;
 };
